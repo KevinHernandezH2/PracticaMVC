@@ -1,0 +1,117 @@
+﻿@{
+
+
+    IEnumerable<string> estadoList = new List<string> { "A", "I" };
+}
+
+
+@{
+    <h1>Mantinimiento de Equipos</h1>
+<form asp-action="CrearEquipos">
+    <div class="row">
+        <div class="form-group row mt-2 mb-4">
+           <div class="col-sm-2">
+                @Html.Label("lblNombre", "Nombre:")
+           </div>
+           <div class="col-sm-4">
+                @Html.TextBox("nombre", "", new { @class="form-control"})
+           </div>
+           <div class="col-sm-2">
+                @Html.Label("lblDescripcion", "Descripcion:")
+           </div>
+            <div class="col-sm-4">
+                @Html.TextArea("descripcion", "", new { @class="form-control"})
+           </div>
+        </div>
+
+        <div class="form-group row mt-2 mb-4">
+            <div class="col-sm-2">
+                  @Html.Label("lblTipo", "Tipo de Equipo:")
+             </div>
+            <div class="col-sm-4">
+                    @Html.DropDownList("id_tipo_equipo",  ViewData["listadoDeTipos"] as SelectList,"Seleccione un Tipo", new {@class="form-control"})
+            </div>
+        </div>
+
+        <div class="form-group row mt-2 mb-4">
+             <div class="col-sm-2">
+                  @Html.Label("lblMarca", "Marca:")
+             </div>
+             <div class="col-sm-4">
+                    @Html.DropDownList("marca_id",ViewData["listadoDeMarcas"] as SelectList, "Seleccione una Marca", new {@class="form-control"})
+             </div>
+             <div class="col-sm-2">
+                  @Html.Label("lblModelo", "Modelo:")
+             </div>
+             <div class="col-sm-4">
+                  @Html.TextBox("modelo", "", new { @class="form-control"})
+             </div>
+        </div>
+
+        <div class="form-group row mt-2 mb-4">
+             <div class="col-sm-2">
+                    @Html.Label("lblAnio", "Año de Compra:")
+             </div>
+             <div class="col-sm-4">
+                    @Html.TextBox("anio_compra", "", new { @class="form-control"})
+             </div>
+             <div class="col-sm-2">
+                    @Html.Label("lblCosto", "Costo del Equipo:")
+             </div>
+             <div class="col-sm-4">
+                    @Html.TextBox("costo", "", new { @class="form-control"})
+             </div>
+        </div>
+
+
+        <div class="form-group row mt-2 mb-4">
+             <div class="col-sm-2">
+                    @Html.Label("lblVidaUtil", "Vida Util:")
+             </div>
+             <div class="col-sm-4">
+                    @Html.TextBox("vida_util", "", new { @class="form-control"})
+             </div>
+             <div class="col-sm-2">
+                    @Html.Label("lblEstado", "Estado del Equipo:")
+             </div>
+             <div class="col-sm-4">
+                    @Html.DropDownList("id_estados_equipo", ViewData["listadoDeEstados"] as SelectList, "Seleccione un Estado", new {@class="form-control"})
+             </div>
+        </div>
+            <div class="form-group">
+                @Html.Label("lblEstado","Estado")
+                @Html.DropDownList("estado",new SelectList(estadoList), "Seleccione un estado",new{@class="form-control"})
+            </div>
+
+        <div class="form-group row mb-4">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
+               <input type="submit" class="btn btn-primary" value="Guardar">
+            </div>
+        </div>
+
+        <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th>Equipo</th>
+                <th>Descripcion</th>
+                <th>Marca</th>  
+            </tr>
+        </thead>
+        <tbody>
+             @foreach (var equipo in (IEnumerable<dynamic>)ViewData["listadoEquipos"])
+             {
+             <tr>
+                <td>@equipo.nombre</td>
+                <td>@equipo.descripcion</td>
+                <td>@equipo.marca_nombre</td>
+             </tr>
+             }
+        </tbody>
+        </table>
+
+    </div>
+
+</form>
+}
